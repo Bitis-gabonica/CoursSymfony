@@ -1,0 +1,46 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Clients{% endblock %}
+
+{% block body %}
+    <h1>Liste des Clients</h1>
+
+    <!-- Affichage des messages de succès/erreur -->
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <!-- Table Bootstrap pour la liste des clients -->
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>surname</th>
+                <th>telephone</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in pagination %}
+                <tr>
+                    <td>{{ client.id }}</td>
+                    <td>{{ client.surname }}</td>
+                    <td>{{ client.telephone }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Liens de pagination -->
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}
